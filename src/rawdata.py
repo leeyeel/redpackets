@@ -8,18 +8,13 @@ rawDataName = '../data/2021.raw'
 rawRootName = 'raw.root'
 
 rootFile = ROOT.TFile(rawRootName, "RECREATE")
-tree = ROOT.TTree("raw", "raw data")
+tree = ROOT.TTree("tree", "raw data")
 vect = ROOT.std.vector("float")(100)
-tree.Branch("raw", vect)
-maxValue = np.empty((1), dtype=float)
-maxIndex = np.empty((1), dtype=int)
-maxIndexPercent = np.empty((1), dtype=float)
-tree.Branch("maxValue", maxValue, "maxValue/F")
-tree.Branch("maxIndex", maxIndex, "maxIndex/I")
-tree.Branch("maxIndexPercent", maxIndexPercent, "maxIndexPercent/F")
+param = ROOT.std.vector("float")(3)
+tree.Branch("data", vect)
+tree.Branch("param", param)
 for line in open(rawDataName):
     nums = line.split(' ')
-    #为了偷懒使用python中的内置函数
     li = list()
     for num in nums:
         if not num: continue
@@ -32,10 +27,15 @@ for line in open(rawDataName):
 
     total = sum(li)
     count = len(li)
-    li = [100 * i/total for i in li]
-    maxValue[0] = max(li)
-    maxIndex[0] = li.index(maxValue[0])
-    maxIndexPercent[0] = 100 * maxIndex[0]/count
+    li = [round(100 * x / total, 2) for x in li]
+    for i in li:
+        print(i)
+    param.clear()
+    maxv = max(li)
+    param.emplace_back(maxv)
+    param.emplace_back(li.index(maxv))
+    param.emplace_back(100 * param[1] / count)
+
     tree.Fill()
 
 rootFile.Write()
