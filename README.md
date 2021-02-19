@@ -16,7 +16,7 @@
 ### 3.手气最佳的直方图
 
 直方图如下:
-![hist](https://github.com/leeyeel/redpackets/tree/main/resource/hist1.eps)
+![hist](https://github.com/leeyeel/redpackets/tree/main/resource/hist1.jpg)
 
 ### 4.统计红包数值的分布
 
