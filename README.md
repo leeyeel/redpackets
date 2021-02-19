@@ -15,6 +15,11 @@
 
 ### 3.手气最佳的直方图
 
-### 4.统计红包数值的分布，假设检验是否是随机值
+直方图如下:
+![hist](https://github.com/leeyeel/redpackets/tree/main/resource/hist1.eps)
+
+### 4.统计红包数值的分布
+
+### 5.根据网络上流传的《微信红包架构设计简介》模拟验证结论
 
 ...
